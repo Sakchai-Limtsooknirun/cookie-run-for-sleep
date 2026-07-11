@@ -1,0 +1,51 @@
+{
+    "public/assets/btn_chest_1200.png": {
+        "scale": 0.763157894736842,
+        "x": 1391,
+        "y": 773,
+        "w": 178,
+        "h": 180
+    },
+    "public/assets/btn_confirm_blue.png": {
+        "scale": 0.763157894736842,
+        "x": 1454,
+        "y": 874,
+        "w": 320,
+        "h": 87
+    },
+    "public/assets/btn_main_play.png": {
+        "scale": 0.763157894736842,
+        "x": 1774,
+        "y": 879,
+        "w": 483,
+        "h": 93
+    },
+    "public/assets/btn_multi.png": {
+        "scale": 0.763157894736842,
+        "x": 2152,
+        "y": 327,
+        "w": 91,
+        "h": 76
+    },
+    "public/assets/btn_multi_buy.png": {
+        "scale": 0.763157894736842,
+        "x": 1476,
+        "y": 818,
+        "w": 264,
+        "h": 71
+    },
+    "public/assets/txt_double_coin.png": {
+        "scale": 0.763157894736842,
+        "x": 1706,
+        "y": 765,
+        "w": 476,
+        "h": 61
+    },
+    "public/assets/btn_ok.png": {
+        "scale": 0.75,
+        "x": 1202,
+        "y": 852,
+        "w": 360,
+        "h": 92
+    }
+}
