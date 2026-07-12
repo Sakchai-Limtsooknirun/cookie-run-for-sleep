@@ -54,10 +54,14 @@ if __name__ == '__main__':
         # 'btn_play_boost.png',
         # 'btn_relay.png',
         # 'btn_ok.png',
-     # 'btn_open_all.png',
+        # 'btn_open_all.png',
         # 'btn_confirm.png',
-        'btn_confirm_blue.png',
-        # 'btn_main_play.png'
+        # 'btn_confirm_blue.png',
+        # 'btn_main_play.png',
+        # 'btn_fast_start.png',
+        'icon_box_x1.png',
+        # 'btn_pause.png',
+        # 'btn_quit.png',
     ]
 
     for img_name in images_to_crop:

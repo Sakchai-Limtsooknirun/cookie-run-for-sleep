@@ -1,13 +1,14 @@
 {
     "public/assets/btn_main_play.png": 0.763157894736842,
     "public/assets/btn_chest_1200.png": 0.763157894736842,
-    "public/assets/btn_multi.png": 0.763157894736842,
+    "public/assets/btn_multi.png": 0.7105263157894737,
     "public/assets/btn_multi_buy.png": 0.763157894736842,
     "public/assets/txt_double_coin.png": 0.763157894736842,
     "public/assets/btn_play_boost.png": 0.763157894736842,
     "public/assets/btn_ok.png": 0.75,
-    "public/assets/btn_confirm.png": 0.763157894736842,
     "public/assets/btn_relay.png": 0.6666666666666666,
+    "public/btn_relay.png": 0.7222222222222222,
     "public/assets/btn_open_all.png": 0.763157894736842,
-    "public/assets/btn_confirm_blue.png": 0.763157894736842
+    "public/assets/btn_confirm_blue.png": 0.763157894736842,
+    "public/assets/btn_confirm.png": 0.6578947368421053
 }
