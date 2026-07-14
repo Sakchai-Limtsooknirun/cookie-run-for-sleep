@@ -1,79 +1,51 @@
 {
-    "public/assets/btn_chest_1200.png": {
-        "scale": 0.763157894736842,
-        "x": 1450,
-        "y": 734,
-        "w": 178,
-        "h": 180
-    },
-    "public/assets/btn_multi.png": {
-        "scale": 0.7105263157894737,
-        "x": 2211,
-        "y": 293,
-        "w": 85,
-        "h": 71
-    },
-    "public/assets/btn_multi_buy.png": {
-        "scale": 0.763157894736842,
-        "x": 1534,
-        "y": 780,
-        "w": 264,
-        "h": 71
-    },
-    "public/assets/txt_double_coin.png": {
-        "scale": 0.763157894736842,
-        "x": 1763,
-        "y": 727,
-        "w": 476,
-        "h": 61
-    },
     "public/assets/btn_pause.png": {
-        "scale": 0.9210526315789473,
-        "x": 2393,
-        "y": 78,
-        "w": 32,
-        "h": 33
-    },
-    "public/assets/btn_quit_confirm.png": {
-        "scale": 0.5,
-        "x": 1855,
-        "y": 133,
-        "w": 158,
-        "h": 42
-    },
-    "public/assets/btn_quit.png": {
         "scale": 0.9736842105263157,
-        "x": 1531,
-        "y": 491,
-        "w": 318,
-        "h": 80
+        "x": 2357,
+        "y": 52,
+        "w": 80,
+        "h": 72
     },
     "public/assets/btn_open_all.png": {
-        "scale": 0.763157894736842,
-        "x": 1544,
-        "y": 816,
-        "w": 318,
-        "h": 94
+        "scale": 0.8157894736842105,
+        "x": 1462,
+        "y": 868,
+        "w": 340,
+        "h": 101
+    },
+    "public/assets/btn_play_boost.png": {
+        "scale": 0.8157894736842105,
+        "x": 1717,
+        "y": 839,
+        "w": 530,
+        "h": 91
+    },
+    "public/assets/btn_quit.png": {
+        "scale": 1.026315789473684,
+        "x": 1450,
+        "y": 518,
+        "w": 335,
+        "h": 85
     },
     "public/assets/btn_confirm_blue.png": {
-        "scale": 0.763157894736842,
-        "x": 1545,
-        "y": 818,
-        "w": 320,
-        "h": 87
-    },
-    "public/assets/btn_main_play.png": {
-        "scale": 0.763157894736842,
-        "x": 1792,
-        "y": 781,
-        "w": 483,
+        "scale": 0.8157894736842105,
+        "x": 1462,
+        "y": 870,
+        "w": 342,
         "h": 93
     },
+    "public/assets/btn_main_play.png": {
+        "scale": 0.8157894736842105,
+        "x": 1729,
+        "y": 830,
+        "w": 517,
+        "h": 100
+    },
     "public/assets/btn_fast_start.png": {
-        "scale": 1.0,
-        "x": 876,
-        "y": 263,
-        "w": 150,
-        "h": 159
+        "scale": 1.0714285714285714,
+        "x": 1572,
+        "y": 424,
+        "w": 160,
+        "h": 170
     }
 }

@@ -227,7 +227,7 @@ def run_coin_farm_bot():
             if keyboard.is_pressed('q'):
                 exit()
 
-            loc_relay = locate_image_multiscale('public/assets/btn_relay.png', confidence=0.70, steps=7)
+            loc_relay = locate_image_multiscale('public/assets/backup/btn_relay.png', confidence=0.70, steps=7)
             if loc_relay is not None:
                 print("⚡ พบปุ่มวิ่งผลัด! รีบกดทันที...")
                 fast_click(loc_relay[0], loc_relay[1])
@@ -284,35 +284,39 @@ def run_box_farm_bot():
             time.sleep(1.0)
 
         print("[Phase 1] กด Play เพื่อเริ่มวิ่ง...")
-        find_and_click('public/assets/btn_play_boost.png', confidence=0.8, timeout=10.0)
+        if(is_image_present('public/assets/btn_chest_1200.png', confidence=0.8)):
+            find_and_click('public/assets/btn_play_boost.png', confidence=0.8, timeout=5.0)
 
         # --- PHASE 2: ในเกม (กด Fast Start และรอกล่อง) ---
         print("[Phase 2] เริ่มวิ่ง กำลังหาปุ่ม Fast Start และรอกล่อง x1...")
         start_time = time.time()
         fast_start_clicked = False
         got_box = False
+        time.sleep(1.0)
 
         while True:
             if keyboard.is_pressed('q'):
                 exit()
-
-            # 1. หาปุ่ม Fast Start (กดครั้งเดียว)
+            
+            # 1. หาปุ่ม Fast Start (ใช้ steps=15 เพื่อหาระยะซูมให้เจอในรอบแรก)
             if not fast_start_clicked:
-                loc_fast = locate_image_multiscale('public/assets/btn_fast_start.png', confidence=0.75, steps=5)
+                loc_fast = locate_image_multiscale('public/assets/btn_fast_start.png', confidence=0.8, steps=15)
                 if loc_fast is not None:
                     print("⚡ พบปุ่ม Fast Start! กดใช้งาน...")
                     fast_click(loc_fast[0], loc_fast[1])
                     fast_start_clicked = True
 
-            # 2. เช็คว่าได้กล่องหรือยัง (สแกนหาไอคอนกล่อง x1 มุมขวาบน)
-            loc_box = locate_image_multiscale('public/assets/icon_box_x1.png', confidence=0.8, steps=5)
-            if loc_box is not None:
-                print("🎁 ได้รับกล่องแล้ว! เตรียมตัวกดออก...")
-                got_box = True
-                break
+            # 2. หารูปกล่อง x1 (หน่วงเวลาให้กด Fast Start ก่อน หรือผ่านไป 2 วินาทีค่อยเริ่มหา จะได้ไม่แย่ง CPU)
+            if fast_start_clicked or (time.time() - start_time > 2.0):
+                # ใช้ steps=15 เพื่อหาขนาดกล่องให้เจอในรอบแรกเช่นกัน
+                loc_box = locate_image_multiscale('public/assets/icon_box_x1.png', confidence=0.75, steps=15)
+                if loc_box is not None:
+                    print("🎁 ได้รับกล่องแล้ว! เตรียมตัวกดออก...")
+                    got_box = True
+                    break
 
             # 3. เผื่อกรณีวิ่งจนตาย หรือไม่เจอกล่องแล้วเด้งหน้า OK
-            loc_ok = locate_image_multiscale('public/assets/btn_ok.png', confidence=0.8, steps=3)
+            loc_ok = locate_image_multiscale('public/assets/btn_ok.png', confidence=0.8, steps=5)
             if loc_ok is not None:
                 print("💀 คุกกี้ตายก่อนได้กล่อง เจอหน้า Result แล้ว...")
                 break
@@ -324,16 +328,17 @@ def run_box_farm_bot():
 
             time.sleep(0.05)
 
-        # --- PHASE 3: ได้กล่องแล้วกดออก (Pause -> Quit -> Quit) ---
         if got_box:
             print("[Phase 3] กำลังกดออกเกม...")
-            # กดปุ่ม Pause มุมขวาบน
-            find_and_click('public/assets/btn_pause.png', confidence=0.8, timeout=5.0)
+            # ⚠️ อัปเดต: ลด confidence ลงเหลือ 0.65 เพื่อให้บอทมองข้ามสีพื้นหลังที่เปลี่ยนไป
+            find_and_click('public/assets/btn_pause.png', confidence=0.65, timeout=5.0)
             time.sleep(0.5)
+
             # กดปุ่ม Quit
             find_and_click('public/assets/btn_quit.png', confidence=0.8, timeout=5.0)
             time.sleep(0.5)
-            # กดปุ่ม Quit (Confirm)
+
+            # กดปุ่ม Quit (Confirm) - ใช้รูป btn_quit.png เหมือนกัน
             find_and_click('public/assets/btn_quit.png', confidence=0.8, timeout=5.0)
             time.sleep(1.5)
 
@@ -343,20 +348,23 @@ def run_box_farm_bot():
         time.sleep(1.5)
 
         # หากล่องและเปิด
-        has_box = find_and_click('public/assets/btn_open_all.png', confidence=0.8, timeout=4.0)
+        has_box = find_and_click('public/assets/btn_open_all.png', confidence=0.8, timeout=15)
         if has_box:
             time.sleep(1.0)
-            find_and_click('public/assets/btn_confirm_blue.png', confidence=0.8, timeout=5.0)
+            find_and_click('public/assets/btn_confirm_blue.png', confidence=0.8, timeout=15)
             time.sleep(1.5)
         else:
             print("-> ไม่ได้กล่อง หรือเผลอกดข้ามไป")
+            find_and_click('public/assets/btn_confirm.png', confidence=0.8, timeout=15)
 
         # เช็คปุ่ม Confirm ทั่วไป
-        find_and_click('public/assets/btn_confirm.png', confidence=0.8, timeout=4.0)
+        while is_image_present('public/assets/btn_confirm.png', confidence=0.8):
+            find_and_click('public/assets/btn_confirm.png', confidence=0.8, timeout=15)
+            time.sleep(1)
 
         # --- PHASE 5: กลับหน้า Lobby ---
         find_and_click('public/assets/btn_main_play.png', confidence=0.8, timeout=10.0)
-        time.sleep(2)
+        
 
         loop_count += 1
 
