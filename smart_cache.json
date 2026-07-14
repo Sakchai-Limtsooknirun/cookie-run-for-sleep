@@ -34,12 +34,12 @@
         "w": 342,
         "h": 93
     },
-    "public/assets/btn_main_play.png": {
+    "public/assets/btn_chest_1200.png": {
         "scale": 0.8157894736842105,
-        "x": 1729,
-        "y": 830,
-        "w": 517,
-        "h": 100
+        "x": 1394,
+        "y": 762,
+        "w": 190,
+        "h": 192
     },
     "public/assets/btn_fast_start.png": {
         "scale": 1.0714285714285714,
