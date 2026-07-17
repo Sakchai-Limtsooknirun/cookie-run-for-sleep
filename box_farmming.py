@@ -278,6 +278,23 @@ def run_box_farm_bot():
         print(f"📦 เริ่มฟาร์มกล่องรอบที่ {loop_count}")
         print(f"=============================")
 
+        print("[Phase 0] ตรวจสอบเงื่อนไขพิเศษหน้าล็อบบี้...")
+        
+        # เช็คให้ชัวร์ก่อนว่าตอนนี้ยืนอยู่หน้าแรกจริงๆ (มองเห็นปุ่ม Play ใหญ่)
+        if is_image_present('public/assets/m3_reach_max_objective_full.png', confidence=0.8):
+            print("   -> 🎯 เก็บชิ้นส่วนครบแล้ว")
+            break
+        print("   -> 🎯 เก็บชิ้นส่วนยังไม่ครบ หรือ หารูปไม่เจอ")
+            # # ใส่รูปที่คุณต้องการเช็คตรงนี้ (เช่น มีปุ่มรับของฟรีเด้งขึ้นมา)
+            # if is_image_present('public/assets/your_special_image.png', confidence=0.8):
+            #     print("   -> 🎯 เจอรูปพิเศษ! กำลังทำซัมติง...")
+                
+            #     # สั่งให้กดรูปนั้น
+            #     find_and_click('public/assets/your_special_image.png', confidence=0.8, timeout=3.0)
+            #     time.sleep(1.0)
+                
+            #     # (ถ้าต้องกดกากบาทปิด หรือกดปุ่ม Confirm ต่อ ก็เขียน find_and_click ต่อตรงนี้ได้เลย)
+                
         # --- PHASE 1: เข้าเกม ---
         if is_image_present('public/assets/btn_main_play.png', confidence=0.8):
             find_and_click('public/assets/btn_main_play.png', confidence=0.8, timeout=5.0)
@@ -351,7 +368,6 @@ def run_box_farm_bot():
         has_box = find_and_click('public/assets/btn_open_all.png', confidence=0.8, timeout=15)
         if has_box:
             time.sleep(1.0)
-            find_and_click('public/assets/btn_confirm_blue.png', confidence=0.8, timeout=15)
             time.sleep(1.5)
         else:
             print("-> ไม่ได้กล่อง หรือเผลอกดข้ามไป")
@@ -364,7 +380,7 @@ def run_box_farm_bot():
 
         # --- PHASE 5: กลับหน้า Lobby ---
         find_and_click('public/assets/btn_main_play.png', confidence=0.8, timeout=10.0)
-        
+        time.sleep(2)
 
         loop_count += 1
 
