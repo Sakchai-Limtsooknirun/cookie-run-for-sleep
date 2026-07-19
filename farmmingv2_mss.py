@@ -245,7 +245,7 @@ def run_farm_bot():
                 exit()
 
             # ปรับ steps ให้เยอะหน่อยในกรณีที่ต้องหาใหม่ แต่ถ้ามี cache แล้วมันจะใช้ 1 step เอง
-            loc_relay = locate_image_multiscale('public/assets/btn_relay.png', confidence=0.8, steps=10)
+            loc_relay = locate_image_multiscale('public/assets/btn_relay.png', confidence=0.8, steps=15)
             if loc_relay is not None:
                 print("⚡ พบปุ่มวิ่งผลัด! รีบกดทันที...")
                 fast_click(loc_relay[0], loc_relay[1])
@@ -295,7 +295,6 @@ def run_farm_bot():
         else:
             print("-> รอบนี้ไม่มีกล่อง ข้ามไป...")
 
-        time.sleep(1.5)
         print("-> เช็คเผื่อมี level up จะได้กด confirm...")
         find_and_click('public/assets/btn_confirm.png', confidence=0.8, timeout=5.0)
         time.sleep(0.5)

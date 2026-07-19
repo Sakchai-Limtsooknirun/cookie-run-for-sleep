@@ -279,21 +279,11 @@ def run_box_farm_bot():
         print(f"=============================")
 
         print("[Phase 0] ตรวจสอบเงื่อนไขพิเศษหน้าล็อบบี้...")
-        
-        # เช็คให้ชัวร์ก่อนว่าตอนนี้ยืนอยู่หน้าแรกจริงๆ (มองเห็นปุ่ม Play ใหญ่)
-        if is_image_present('public/assets/m3_reach_max_objective_full.png', confidence=0.8):
-            print("   -> 🎯 เก็บชิ้นส่วนครบแล้ว")
-            break
-        print("   -> 🎯 เก็บชิ้นส่วนยังไม่ครบ หรือ หารูปไม่เจอ")
-            # # ใส่รูปที่คุณต้องการเช็คตรงนี้ (เช่น มีปุ่มรับของฟรีเด้งขึ้นมา)
-            # if is_image_present('public/assets/your_special_image.png', confidence=0.8):
-            #     print("   -> 🎯 เจอรูปพิเศษ! กำลังทำซัมติง...")
-                
-            #     # สั่งให้กดรูปนั้น
-            #     find_and_click('public/assets/your_special_image.png', confidence=0.8, timeout=3.0)
-            #     time.sleep(1.0)
-                
-            #     # (ถ้าต้องกดกากบาทปิด หรือกดปุ่ม Confirm ต่อ ก็เขียน find_and_click ต่อตรงนี้ได้เลย)
+
+        while is_image_present('public/assets/btn_confirm.png', confidence=0.8):
+            find_and_click('public/assets/btn_confirm.png', confidence=0.8, timeout=15)
+            time.sleep(1)
+    
                 
         # --- PHASE 1: เข้าเกม ---
         if is_image_present('public/assets/btn_main_play.png', confidence=0.8):
@@ -315,49 +305,19 @@ def run_box_farm_bot():
             if keyboard.is_pressed('q'):
                 exit()
             
-            # # 1. หาปุ่ม Fast Start (ใช้ steps=15 เพื่อหาระยะซูมให้เจอในรอบแรก)
-            # if not fast_start_clicked:
-            #     loc_fast = locate_image_multiscale('public/assets/btn_fast_start.png', confidence=0.8, steps=15)
-            #     if loc_fast is not None:
-            #         print("⚡ พบปุ่ม Fast Start! กดใช้งาน...")
-            #         fast_click(loc_fast[0], loc_fast[1])
-            #         fast_start_clicked = True
-
-            # 2. หารูปกล่อง x1 (หน่วงเวลาให้กด Fast Start ก่อน หรือผ่านไป 2 วินาทีค่อยเริ่มหา จะได้ไม่แย่ง CPU)
-            # if (time.time() - start_time > 2.0):
-            #     # ใช้ steps=15 เพื่อหาขนาดกล่องให้เจอในรอบแรกเช่นกัน
-            #     loc_box = locate_image_multiscale('public/assets/icon_box_x1.png', confidence=0.75, steps=15)
-            #     if loc_box is not None:
-            #         print("🎁 ได้รับกล่องแล้ว! เตรียมตัวกดออก...")
-            #         got_box = True
-            #         break
-
             # 3. เผื่อกรณีวิ่งจนตาย หรือไม่เจอกล่องแล้วเด้งหน้า OK
             loc_ok = is_image_present('public/assets/btn_ok.png', confidence=0.8)
             if loc_ok:
                 print("💀 คุกกี้ตายก่อนได้กล่อง เจอหน้า Result แล้ว...")
                 break
 
-            # # 4. Timeout กันบั๊ก (วิ่งเกิน 2.5 นาทีข้ามไปเริ่มใหม่)
-            # if time.time() - start_time > 150.0:
-            #     print("⚠️ วิ่งนานเกินไป ข้ามรอบนี้")
-            #     break
+            # 4. Timeout กันบั๊ก (วิ่งเกิน 2.5 นาทีข้ามไปเริ่มใหม่)
+            if time.time() - start_time > 300:
+                print("⚠️ วิ่งนานเกินไป ข้ามรอบนี้")
+                break
 
             time.sleep(0.05)
 
-        # if got_box:
-        #     print("[Phase 3] กำลังกดออกเกม...")
-        #     # ⚠️ อัปเดต: ลด confidence ลงเหลือ 0.65 เพื่อให้บอทมองข้ามสีพื้นหลังที่เปลี่ยนไป
-        #     find_and_click('public/assets/btn_pause.png', confidence=0.65, timeout=5.0)
-        #     time.sleep(0.5)
-        #
-        #     # กดปุ่ม Quit
-        #     find_and_click('public/assets/btn_quit.png', confidence=0.8, timeout=5.0)
-        #     time.sleep(0.5)
-        #
-        #     # กดปุ่ม Quit (Confirm) - ใช้รูป btn_quit.png เหมือนกัน
-        #     find_and_click('public/assets/btn_quit.png', confidence=0.8, timeout=5.0)
-        #     time.sleep(1.5)
 
         # --- PHASE 4: หน้า Result และเปิดกล่อง ---
         print("[Phase 4] รอรับของรางวัล...")
@@ -378,6 +338,21 @@ def run_box_farm_bot():
             find_and_click('public/assets/btn_confirm.png', confidence=0.8, timeout=15)
             time.sleep(1)
 
+                # เช็คให้ชัวร์ก่อนว่าตอนนี้ยืนอยู่หน้าแรกจริงๆ (มองเห็นปุ่ม Play ใหญ่)
+        if is_image_present('public/assets/m3_reach_max_objective_full.png', confidence=0.8):
+            print("   -> 🎯 เก็บชิ้นส่วนครบแล้ว")
+            find_and_click('public/assets/m3_reach_max_objective_full.png', confidence=0.8, timeout=5.0)
+            time.sleep(1.0)
+            find_and_click('public/assets/btn_claim.png', confidence=0.8, timeout=5.0)
+            time.sleep(4)
+            while is_image_present('public/assets/btn_confirm.png', confidence=0.8):
+                find_and_click('public/assets/btn_confirm.png', confidence=0.8, timeout=15)
+                time.sleep(1)
+            find_and_click('public/assets/btn_quit_reward.png', confidence=0.8, timeout=5.0)
+            time.sleep(1.0)
+            print("   -> 🎯 เก็บของแล้ว")
+        else:
+            print("   -> 🎯 เก็บชิ้นส่วนยังไม่ครบ หรือ หารูปไม่เจอ")
         # --- PHASE 5: กลับหน้า Lobby ---
         find_and_click('public/assets/btn_main_play.png', confidence=0.8, timeout=10.0)
         time.sleep(2)
